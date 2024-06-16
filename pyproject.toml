@@ -82,3 +82,12 @@ combine_as_imports = true
 [tool.hatch.build]
 include = ["ariadne_codegen/**/*.py", "ariadne_codegen/py.typed"]
 exclude = ["tests"]
+
+[tool.ariadne-codegen]
+queries_path = "examples/queries.graphql"
+schema_path = "examples/saleor_schema.graphql"
+target_package_path = "examples"
+enable_custom_operations = true
+
+[tool.ariadne-codegen.scalars.uuid]
+type = "uuid.UUID"

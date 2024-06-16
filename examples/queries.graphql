@@ -1,0 +1,5 @@
+query warehouses {
+    warehouse {
+        id
+    }
+}
