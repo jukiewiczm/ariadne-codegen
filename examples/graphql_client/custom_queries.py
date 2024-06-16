@@ -142,7 +142,8 @@ from .input_types import (
     WarehouseFilterInput,
     WarehouseSortingInput,
 )
-# from .enums import *
+from .enums import *
+
 
 class Query:
     @classmethod
