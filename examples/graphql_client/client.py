@@ -17,6 +17,11 @@ from .base_operation import GraphQLField
 from .warehouses import Warehouses
 
 
+from typing import TypeVar
+from pydantic import BaseModel
+
+OUTPUT_TYPE = TypeVar("OUTPUT_TYPE", bound=BaseModel)
+
 def gql(q: str) -> str:
     return q
 
@@ -62,6 +67,11 @@ class Client(AsyncBaseClient):
         return await self.execute_custom_operation(
             *fields, operation_type=OperationType.QUERY, operation_name=operation_name
         )
+
+    async def structured_query(
+            self, *fields: "GraphQLField", operation_name: str, output_type: type[OUTPUT_TYPE]
+    ) -> OUTPUT_TYPE:
+        return output_type.parse_obj(await self.query(*fields, operation_name=operation_name))
 
     async def mutation(
         self, *fields: GraphQLField, operation_name: str
